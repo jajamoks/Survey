@@ -13,9 +13,6 @@
   ],
   "rules": {
     "semi": "off",
-    "import/no-unresolved": [
-      2, 
-      { "caseSensitive": false }
-   ]
+    "global-require": "off"
   }
 }

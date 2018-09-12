@@ -3,6 +3,7 @@ const config = {
   authDomain: 'localhost',
   projectId: 'questionnaire-37a76',
   databaseURL: 'https://questionnaire-37a76.firebaseio.com',
-};
+  storageBucket: 'gs://questionnaire-37a76.appspot.com',
+}
 
-export default config;
+export default config

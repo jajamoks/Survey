@@ -1,6 +1,7 @@
 <template>
   <button
     :color="color"
+    :class="{'big': isBig, 'centered': isCentered}"
     class="button"
     @click="$emit('click')"
   >
@@ -21,11 +22,23 @@ export default {
       type: String,
       default: '',
     },
+
     color: {
       type: String,
       default: 'yellow',
     },
+
     isArrow: {
+      type: Boolean,
+      default: false,
+    },
+
+    isBig: {
+      type: Boolean,
+      default: false,
+    },
+
+    isCentered: {
       type: Boolean,
       default: false,
     },
@@ -39,6 +52,7 @@ export default {
   margin-right: auto;
   width: 233.1px;
   height: 53.9px;
+  cursor: pointer;
   border: none;
   font-family: 'Orgon-Light';
   font-size: 22.5px;
@@ -46,12 +60,12 @@ export default {
   text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.11);
   letter-spacing: .3px;
+  padding-left: 28px;
+  padding-right: 28px;
 }
 
 .button[color="yellow"] {
   background-image: linear-gradient(to bottom, #febf10, #e49a16);
-  padding-left: 46.2px;
-  padding-right: 28px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -59,5 +73,13 @@ export default {
 
 .button[color="blue"] {
   background-image: linear-gradient(to bottom, #027cc5, #015485);
+}
+
+.button.big {
+  padding-left: 46.2px;
+}
+
+.button.centered {
+  justify-content: center;
 }
 </style>

@@ -22,6 +22,7 @@
 
       <mn-button
         :is-arrow="true"
+        :is-big="true"
         color="yellow"
         text="Start survey"
         @click="onStartClick"
@@ -31,6 +32,7 @@
 </template>
 
 <script>
+/* eslint import/no-unresolved: 0 */
 import MnButton from '@/components/MnButton.vue'
 
 export default {
