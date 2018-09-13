@@ -92,12 +92,14 @@ export default {
 
   methods: {
     onNextClick() {
-      const self = this
-      this.isReady = false
-      this.$emit('onNextClick', this.currentAnswers)
-      setTimeout(() => {
-        self.isReady = true
-      }, 100)
+      if (this.currentAnswers[`answer${this.currentQuestion}`]) {
+        const self = this
+        this.isReady = false
+        this.$emit('onNextClick', this.currentAnswers)
+        setTimeout(() => {
+          self.isReady = true
+        }, 100)
+      }
     },
 
     onPrevClick() {

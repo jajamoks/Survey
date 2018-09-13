@@ -13,6 +13,7 @@
         <img
           v-if="photo.length > 0"
           :src="photo"
+          class="user-photo"
           alt="card"
         >
 
@@ -116,7 +117,9 @@ export default {
 
     upload(e) {
       const file = e.target.files[0]
-      if (file) {
+      if (file && !file.type.includes('image')) {
+        alert('Only images allowed')
+      } else if (file) {
         this.makePreview(file)
         this.$emit('upload', file)
       }
@@ -203,6 +206,10 @@ export default {
 
 .inputs label .checkmark img {
   margin-right: 9px;
+}
+
+.user-photo {
+  max-height: 100%;
 }
 
 .controls {

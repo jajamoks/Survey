@@ -75,6 +75,13 @@
             @onSubmitClick="onSubmitClick"
             @onPrevClick="goToPrevStep"
           />
+
+          <last-page
+            v-if="currentStep === 5"
+            key="last page"
+            :user-id="userId"
+            @reset="resetQuiz"
+          />
         </transition-group>
       </div>
     </div>
@@ -90,6 +97,7 @@ import PageTwo from '@/components/MnPageTwo.vue'
 import Questions from '@/components/MnQuestions.vue'
 import TakePhoto from '@/components/MnTakePhoto.vue'
 import Submit from '@/components/MnSubmit.vue'
+import LastPage from '@/components/MnLastPage.vue'
 
 export default {
   name: 'App',
@@ -99,6 +107,7 @@ export default {
     Questions,
     TakePhoto,
     Submit,
+    LastPage,
     BreedingRhombusSpinner,
   },
 
@@ -116,12 +125,7 @@ export default {
   },
 
   created() {
-    this.getAllQuestions().then((snapshot) => {
-      this.questions = snapshot.val()
-      this.questions.forEach((el, index) => {
-        this.answers[`answer${index}`] = ''
-      })
-    })
+    this.getAllQuestions()
   },
 
   methods: {
@@ -135,10 +139,20 @@ export default {
 
     resetQuiz() {
       this.currentStep = 0
+      this.currentQuestion = 0
+      this.answers = {
+        photo: '',
+      }
+      this.getAllQuestions()
     },
 
     getAllQuestions() {
-      return firebase.database().ref('/questions').once('value')
+      return firebase.database().ref('/questions').once('value').then((snapshot) => {
+        this.questions = snapshot.val()
+        this.questions.forEach((el, index) => {
+          this.answers[`answer${index}`] = ''
+        })
+      })
     },
 
     onNextQuestionClick(e) {
