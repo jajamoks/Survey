@@ -1,5 +1,8 @@
 <template>
-  <div id="app">
+  <div
+    v-if="questions.length > 0"
+    id="app"
+  >
     <div class="white-line"/>
 
     <div
@@ -117,6 +120,7 @@ export default {
       currentQuestion: 0,
       userId: null,
       isLoader: false,
+      answersLength: null,
       answers: {
         photo: '',
       },
@@ -126,6 +130,7 @@ export default {
 
   created() {
     this.getAllQuestions()
+    this.updateId()
   },
 
   methods: {
@@ -140,6 +145,7 @@ export default {
     resetQuiz() {
       this.currentStep = 0
       this.currentQuestion = 0
+      this.userId = null
       this.answers = {
         photo: '',
       }
@@ -187,7 +193,7 @@ export default {
     },
 
     saveImageToStorage(id) {
-      return firebase.storage().ref().child(id).put(this.answers.photo)
+      return firebase.storage().ref().child(`${id}`).put(this.answers.photo)
     },
 
     saveAnswersToDatabase(id, data, callback) {
@@ -198,21 +204,24 @@ export default {
       })
     },
 
+    updateId () {
+      firebase.database().ref('/answers').on('value', (snapshot) => {
+        this.answersLength = snapshot.val().length
+      })
+    },
+
     onSubmitClick() {
       this.isLoader = true
-      let userPhotoId = null
-      this.getAnswers().then((snapshot) => {
-        this.userId = snapshot.val().length
-        userPhotoId = `${this.userId}_${new Date().getTime()}`
-        this.saveImageToStorage(userPhotoId).then((responce) => {
-          if (responce.state === 'success') {
-            this.answers.photo = userPhotoId
-            this.saveAnswersToDatabase(this.userId, this.answers, () => {
-              this.goToNextStep()
-              this.isLoader = false
-            })
-          }
-        })
+      let userPhotoId = new Date().valueOf() + Math.random()
+      this.saveImageToStorage(userPhotoId).then((responce) => {
+        if (responce.state === 'success') {
+          this.answers.photo = userPhotoId
+          this.userId = this.answersLength
+          this.saveAnswersToDatabase(this.userId, this.answers, () => {
+            this.isLoader = false
+            this.goToNextStep()
+          })
+        }
       })
     },
   },

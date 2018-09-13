@@ -10,7 +10,7 @@
     </div>
 
     <div class="number">
-      {{ userId }}
+      <div class="num">{{ userId }}</div>
     </div>
 
     <div class="texts">
@@ -75,6 +75,7 @@ export default {
 .last-wrapper {
   text-align: center;
   padding-top: 40px;
+  font-size: 0;
 }
 
 .title {
@@ -89,21 +90,36 @@ export default {
   font-weight: 300;
   margin-top: 11px;
   letter-spacing: .5px;
+  margin-bottom: 15px;
 }
 
 .number {
-  margin-top: 15px;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.11);
-  text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-  background-image: linear-gradient(to bottom, #febf10, #e49a16);
   width: 235px;
-  height: 99px;
   margin-left: auto;
   margin-right: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+  height: 99px;
+  overflow: hidden;
+  background-image: linear-gradient(to bottom, #febf10, #e49a16);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.11);
+}
+
+.num {
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
   font-size: 88.5px;
+  line-height: 1;
+  position: absolute;
+  font-family: Orgon-Light;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media screen and (max-width: 425px) {
+  .num {
+    top: 16px;
+    transform: translateX(-50%);
+  }
 }
 
 .texts {

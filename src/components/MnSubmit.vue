@@ -32,8 +32,8 @@ sc<template>
 
       <div class="controls">
         <mn-button
-          :is-arrow="false"
-          :is-centered="true"
+          :is-arrow="true"
+          :is-submit="true"
           color="yellow"
           text="Submit"
           @click="onSubmitClick"

@@ -1,7 +1,7 @@
 <template>
   <button
     :color="color"
-    :class="{'big': isBig, 'centered': isCentered}"
+    :class="{'big': isBig, 'centered': isCentered, 'submit': isSubmit, 'next': isNext}"
     class="button"
     @click="$emit('click')"
   >
@@ -42,6 +42,16 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    isSubmit: {
+      type: Boolean,
+      default: false,
+    },
+    
+    isNext: {
+      type: Boolean,
+      default: false,
+    },
   },
 };
 </script>
@@ -62,6 +72,7 @@ export default {
   letter-spacing: .3px;
   padding-left: 28px;
   padding-right: 28px;
+  line-height:normal !important;
 }
 
 .button[color="yellow"] {
@@ -77,6 +88,14 @@ export default {
 
 .button.big {
   padding-left: 46.2px;
+}
+
+.button.submit {
+  padding-left: 77px;
+}
+
+.button.next {
+  padding-left: 95px;
 }
 
 .button.centered {

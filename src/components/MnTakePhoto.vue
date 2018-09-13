@@ -17,6 +17,14 @@
           alt="card"
         >
 
+        <img
+          v-show="photo"
+          class="close-btn"
+          src="@/assets/img/close.svg"
+          alt="close"
+          @click="resetPhoto"
+        >
+
         <label
           v-show="photo.length === 0"
           class="take-label only-desktop">
@@ -59,8 +67,9 @@
       <div class="controls">
         <mn-button
           :is-arrow="true"
+          :is-next="true"
           color="yellow"
-          text="Next question"
+          text="Next"
           @click="onNextClick"
         />
 
@@ -98,6 +107,12 @@ export default {
       if (this.photo) {
         this.$emit('onNextClick')
       }
+    },
+
+    resetPhoto () {
+      this.photo = ''
+      this.$refs.uploadImage.value = ''
+      this.$refs.takeImage.value = ''
     },
 
     onPrevClick() {
@@ -172,6 +187,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .inputs label {
@@ -179,7 +195,7 @@ export default {
   position: relative;
 }
 
-.inputs label:first-child {
+.inputs label:first-of-type {
   margin-bottom: 13.1px;
 }
 
@@ -225,6 +241,21 @@ export default {
   font-size: 20px;
   line-height: 1.58;
   margin-top: 28.1px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  opacity: .6;
+  transition: opacity .3s ease;
+}
+
+.close-btn:hover  {
+  opacity: 1;
 }
 
 @media screen and (min-width: 769px) {
