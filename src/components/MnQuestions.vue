@@ -24,8 +24,9 @@
         <div class="controls">
           <mn-button
             :is-arrow="true"
+            :is-next="currentQuestion === questions.length - 1"
+            :text="`Next ${currentQuestion === questions.length - 1 ? 'step' :'question'}`"
             color="yellow"
-            text="Next question"
             @click="onNextClick"
           />
 
@@ -34,7 +35,7 @@
             class="prev-link"
             @click="onPrevClick"
           >
-            Previous question
+            {{ `Previous ${currentQuestion === 0 ? 'step' :'question'}` }}
           </a>
         </div>
 

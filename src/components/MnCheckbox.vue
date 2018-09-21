@@ -11,7 +11,7 @@
       <span class="checkmark" />
 
       <div class="text">
-        I accept the Terms and <br > Conditions
+        I accept the privacy policy
       </div>
     </label>
   </div>

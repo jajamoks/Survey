@@ -1,4 +1,4 @@
-sc<template>
+<template>
   <div class="questions-wrapper">
     <div class="indicator">
       Submit your survey
@@ -6,18 +6,15 @@ sc<template>
 
     <div class="main-content">
       <div class="header">
-        Almost there, <br > please agree with our<br >policy to participate
+        Almost there, <br > please accept our privacy<br >policy to participate
       </div>
 
       <div class="policy-wrapp">
         <div class="policy">
-          Privacy policy <br >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Vestibulum sed semper arcu. Donec posuere ultrices vehicula.
-          Curabitur lacus metus, posuere nec risus eget, commodo cursus magna.
-          Maecenas dignissim felis non sapien sollicitudin, ut sodales quam luctus.
-          Nunc vitae lacus vel lorem consectetur tristique a bibendum erat. Nullam lobortis
-          rutrum ullamcorper. Vestibulum tincidunt feugiat justo sed luctus.
+          Privacy policy
+          <br >
+          <br >
+          {{ terms }}
           <br>
           <br>
           <br>
@@ -62,6 +59,13 @@ export default {
   components: {
     MnButton,
     MnCheckbox,
+  },
+
+  props: {
+    terms: {
+      type: String,
+      default: 'Default Terms',
+    },
   },
 
   data() {

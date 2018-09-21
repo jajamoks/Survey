@@ -15,23 +15,19 @@
 
     <div class="texts">
       <p>
-        We will draw winning numbers<br >
-        in ASE booth at 15:00 <br >
-        on Monday, Tuesday and Wednesday <br >
-        (16th, 17th and 18th September).
+        Please memorise your<br >
+        ASE raffle number<br >
       </p>
 
       <p>
         Winning numbers will be <br >
-        announced by email, <br >
-        but you are also welcome to visit <br >
-        our booth for information.
+        drawn in ASE booth <br >
+        at 15:30 on 17, 18 and 19 September
       </p>
 
       <p>
-        Please note that prizes need to be <br >
-        collected in ASE booth <br >
-        before 12:00 on 20th September.
+        Prizes can be collected in ASE booth <br >
+        until 12:00 on 20th September.
       </p>
     </div>
 
@@ -40,7 +36,7 @@
       href="javascript:;"
       @click="resetQuiz"
     >
-      Start over
+      Restart
     </a>
   </div>
 </template>
@@ -54,13 +50,6 @@ export default {
       type: Number,
       required: true,
     },
-  },
-
-  mounted() {
-    const self = this
-    setTimeout(() => {
-      self.resetQuiz()
-    }, 5000)
   },
 
   methods: {

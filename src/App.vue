@@ -21,7 +21,10 @@
       alt="background"
     >
 
-    <div class="wrapper">
+    <div
+      :class="{'full-screen': currentStep === 11}"
+      class="wrapper"
+    >
       <img
         src="@/assets/img/bg-blue@2x.png"
         class="bg-image"
@@ -33,6 +36,7 @@
           src="@/assets/img/logo.svg"
           class="logo"
           alt="logo"
+          @click="goToLogin"
         >
       </div>
 
@@ -75,6 +79,7 @@
           <submit
             v-if="currentStep === 4"
             key="submit"
+            :terms="terms"
             @onSubmitClick="onSubmitClick"
             @onPrevClick="goToPrevStep"
           />
@@ -84,6 +89,20 @@
             key="last page"
             :user-id="userId"
             @reset="resetQuiz"
+          />
+
+          <login
+            v-if="currentStep === 10"
+            key="login"
+            @exitClick="onLoginExitClick"
+            @loginClick="loginClick($event)"
+          />
+
+          <admin
+            v-if="currentStep === 11"
+            key="admin"
+            :users="usersData"
+            :answer-amount="questions.length"
           />
         </transition-group>
       </div>
@@ -101,6 +120,8 @@ import Questions from '@/components/MnQuestions.vue'
 import TakePhoto from '@/components/MnTakePhoto.vue'
 import Submit from '@/components/MnSubmit.vue'
 import LastPage from '@/components/MnLastPage.vue'
+import Login from '@/components/MnLogin.vue'
+import Admin from '@/components/MnAdmin.vue'
 
 export default {
   name: 'App',
@@ -112,6 +133,8 @@ export default {
     Submit,
     LastPage,
     BreedingRhombusSpinner,
+    Login,
+    Admin,
   },
 
   data() {
@@ -120,6 +143,8 @@ export default {
       currentQuestion: 0,
       userId: null,
       isLoader: false,
+      usersData: [],
+      terms: null,
       answersLength: null,
       answers: {
         photo: '',
@@ -131,6 +156,7 @@ export default {
   created() {
     this.getAllQuestions()
     this.updateId()
+    this.getTerms()
   },
 
   methods: {
@@ -183,6 +209,12 @@ export default {
       this.answers.photo = photo
     },
 
+    getTerms() {
+      firebase.database().ref('/terms').once('value').then((snapshot) => {
+        this.terms = snapshot.val()
+      })
+    },
+
     onPhotoNext() {
       // photo validation goes here
       this.goToNextStep()
@@ -204,15 +236,34 @@ export default {
       })
     },
 
-    updateId () {
+    updateId() {
       firebase.database().ref('/answers').on('value', (snapshot) => {
         this.answersLength = snapshot.val().length
+        this.usersData = snapshot.val()
       })
+    },
+
+    goToLogin() {
+      if (this.currentStep === 0 || this.currentStep === 11) {
+        this.currentStep = 10
+      }
+    },
+
+    loginClick(data) {
+      firebase.auth().signInWithEmailAndPassword(data.email, data.password).then(() => {
+        this.currentStep = 11
+      }).catch((err) => {
+        alert(err.message)
+      })
+    },
+
+    onLoginExitClick() {
+      this.currentStep = 0
     },
 
     onSubmitClick() {
       this.isLoader = true
-      let userPhotoId = new Date().valueOf() + Math.random()
+      const userPhotoId = new Date().valueOf() + Math.random()
       this.saveImageToStorage(userPhotoId).then((responce) => {
         if (responce.state === 'success') {
           this.answers.photo = userPhotoId
@@ -340,6 +391,10 @@ img {
   display: none;
 }
 
+.content {
+  height: calc(100vh - 117px);
+}
+
 @media screen and (min-width: 426px) {
   .bg-image {
     display: none;
@@ -399,5 +454,10 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.full-screen {
+  max-width: 100vw;
+  max-height: auto;
 }
 </style>

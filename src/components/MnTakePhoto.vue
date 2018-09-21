@@ -6,7 +6,7 @@
 
     <div class="main-content">
       <div class="header">
-        Take a photo of your <br > business card
+        Please take a photo of <br > your business card
       </div>
 
       <div class="inputs">
@@ -69,7 +69,7 @@
           :is-arrow="true"
           :is-next="true"
           color="yellow"
-          text="Next"
+          text="Next step"
           @click="onNextClick"
         />
 
@@ -109,7 +109,7 @@ export default {
       }
     },
 
-    resetPhoto () {
+    resetPhoto() {
       this.photo = ''
       this.$refs.uploadImage.value = ''
       this.$refs.takeImage.value = ''

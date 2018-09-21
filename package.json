@@ -10,6 +10,8 @@
   "dependencies": {
     "epic-spinners": "^1.0.3",
     "firebase": "^5.4.2",
+    "mailgun.js": "^2.0.1",
+    "node-mandrill": "^1.0.1",
     "vue": "^2.5.17"
   },
   "devDependencies": {

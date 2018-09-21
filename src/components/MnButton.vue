@@ -47,7 +47,7 @@ export default {
       type: Boolean,
       default: false,
     },
-    
+
     isNext: {
       type: Boolean,
       default: false,
@@ -95,7 +95,7 @@ export default {
 }
 
 .button.next {
-  padding-left: 95px;
+  padding-left: 65px;
 }
 
 .button.centered {
