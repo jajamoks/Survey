@@ -72,7 +72,7 @@ export default {
     getRadioBg(expected) {
       const BG = this.selected === expected ? 'checked.svg' : 'un-checked.svg'
       return {
-        backgroundImage: `url('/raffle2018/${BG}')`,
+        backgroundImage: `url('/${BG}')`,
       }
     },
   },
