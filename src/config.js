@@ -1,9 +1,9 @@
 const config = {
-  apiKey: 'AIzaSyCeq19TrDvv1apsOTpGVKyc94h3JrnDbTc',
+  apiKey: 'API_KEY_HERE',
   authDomain: 'localhost',
-  projectId: 'survey-b8d6c',
-  databaseURL: 'https://survey-b8d6c.firebaseio.com/',
-  storageBucket: 'gs://survey-b8d6c.appspot.com',
+  projectId: 'YOUR_PROJECT_ID',
+  databaseURL: 'YOUR_DATABASE_URL',
+  storageBucket: 'YOUR_STORAGE_BUCKEt_URL',
 }
 
 export default config
