@@ -7,6 +7,9 @@ Photo is also required.
 Then user accepts terms and send answers and photo to firebase database and storage.
 There is special page for admin where answers and photos of all users are shown.
 
+## Demo
+http://survey.da4.info/
+
 ## Project setup
 ```
 npm install
